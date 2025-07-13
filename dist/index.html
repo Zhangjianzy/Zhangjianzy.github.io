@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="张舰 - 面向 AIGC 转型的前端研发专家，专注于 AIGC 相关前端技术开发。">
+  <meta name="keywords" content="张舰, 前端研发专家, AIGC, 面向 AIGC 转型, 前端技术">
+  <title>张舰 - 面向 AIGC 转型的前端研发专家</title>
+  <link rel="icon" href="/assets/favicon-64BasgHd.svg" type="image/svg+xml">
+  <style>
+    /* 基础样式 */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #f9fafb;
+      color: #1d2129;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 颜色变量 */
+    :root {
+      --primary: #165DFF;
+      --secondary: #36CFC9;
+      --dark: #1D2129;
+      --light: #F2F3F5;
+      --gray-medium: #86909C;
+    }
+
+    /* 容器样式 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* 导航栏样式 */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      transition: all 0.3s ease;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    nav h1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-buttons button {
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #zh-btn {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    #en-btn {
+      background-color: #e5e7eb;
+      color: #4b5563;
+    }
+
+    /* 主要内容样式 */
+    main {
+      padding: 96px 0 64px 0;
+    }
+
+    /* 通用区块样式 */
+    .section {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 24px 32px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* 个人信息部分 */
+    .personal-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 768px) {
+      .personal-info {
+        flex-direction: row;
+      }
+    }
+
+    .personal-info-left {
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .personal-info-left {
+        margin-bottom: 0;
+      }
+    }
+
+    .personal-info h2 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .personal-info p {
+      font-size: 20px;
+      color: var(--gray-medium);
+      margin-bottom: 24px;
+    }
+
+    .personal-details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .personal-details {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .personal-details-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .personal-details-item i {
+      color: var(--primary);
+      font-size: 20px;
+    }
+
+    .personal-info-right {
+      display: flex;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .personal-info-right {
+        justify-content: flex-end;
+      }
+    }
+
+    .avatar-container {
+      width: 144px;
+      height: 144px;
+      border-radius: 50%;
+      background-color: rgba(22, 93, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 2px solid rgba(22, 93, 255, 0.2);
+    }
+
+    .avatar-container i {
+      font-size: 64px;
+      color: rgba(22, 93, 255, 0.4);
+    }
+
+    /* 核心竞争力部分 */
+    .competencies {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .competencies {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .competency-card {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 20px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .competency-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .competency-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .competency-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(22, 93, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
+    .competency-icon i {
+      color: var(--primary);
+    }
+
+    .competency-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .competency-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .competency-list li {
+      margin-bottom: 8px;
+    }
+
+    /* 工作经历部分 */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-bottom: 8px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -31px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      border: 3px solid #E8F3FF;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 20px;
+      width: 2px;
+      height: calc(100% + 20px);
+      background-color: #E8F3FF;
+    }
+
+    .timeline-item:last-child::after {
+      display: none;
+    }
+
+    .timeline-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .timeline-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .timeline-header h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .timeline-header span {
+      color: var(--gray-medium);
+    }
+
+    .timeline-position {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .timeline-list li {
+      margin-bottom: 8px;
+    }
+
+    /* 项目经历部分 */
+    .project-item {
+      border-left: 4px solid var(--primary);
+      padding-left: 24px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      margin-bottom: 32px;
+    }
+
+    .project-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .project-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .project-header h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .project-header span {
+      color: var(--gray-medium);
+    }
+
+    .project-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .project-list li {
+      margin-bottom: 8px;
+    }
+
+    /* 教育经历部分 */
+    .education {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .education {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .education-item {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .education-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .education-degree {
+      margin-bottom: 4px;
+    }
+
+    .education-year {
+      color: var(--gray-medium);
+    }
+
+    /* 专业认证与荣誉部分 */
+    .certifications {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .certifications li {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .certifications i {
+      color: var(--primary);
+      margin-right: 12px;
+      margin-top: 2px;
+    }
+
+    /* 页脚样式 */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    /* 隐藏类 */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 语言切换导航 -->
+  <nav>
+    <div class="container">
+      <h1>
+        <span class="zh">张舰 - 前端研发专家</span>
+        <span class="en hidden">Zhang Jian - Frontend R&D Expert</span>
+      </h1>
+      <div class="nav-buttons">
+        <button id="zh-btn">
+          中文
+        </button>
+        <button id="en-btn">
+          English
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="container">
+    <!-- 个人信息部分 -->
+    <section class="section" id="personal-info">
+      <div class="personal-info">
+        <div class="personal-info-left">
+          <h2>
+            <span class="zh">张舰</span>
+            <span class="en hidden">Zhang Jian</span>
+          </h2>
+          <p>
+            <span class="zh">前端研发 | 10年经验 | 硕士</span>
+            <span class="en hidden">Frontend R&D | 10 Years Experience | Master's Degree</span>
+          </p>
+          
+          <div class="personal-details">
+            <div class="personal-details-item">
+              <i class="fa fa-envelope"></i>
+              <span>zhangjianzy@qq.com</span>
+            </div>
+            <div class="personal-details-item">
+              <i class="fa fa-phone"></i>
+              <span>+86 17602135810</span>
+            </div>
+            <div class="personal-details-item">
+              <i class="fa fa-map-marker"></i>
+              <span class="zh">上海</span>
+              <span class="en hidden">Shanghai</span>
+            </div>
+            <div class="personal-details-item">
+              <i class="fa fa-graduation-cap"></i>
+              <span class="zh">硕士学历</span>
+              <span class="en hidden">Master's Degree</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="personal-info-right">
+          <div class="avatar-container">
+            <i class="fa fa-user"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心竞争力 -->
+    <section class="section" id="competencies">
+      <h2>
+        <span class="zh">核心竞争力</span>
+        <span class="en hidden">Core Competencies</span>
+      </h2>
+      
+      <div class="competencies">
+        <!-- 技术架构与开发能力 -->
+        <div class="competency-card">
+          <div class="competency-header">
+            <div class="competency-icon">
+              <i class="fa fa-code"></i>
+            </div>
+            <h3>
+              <span class="zh">技术架构与开发能力</span>
+              <span class="en hidden">Technical Architecture & Development</span>
+            </h3>
+          </div>
+          <ul class="competency-list">
+            <li class="zh">精通 React/Node.js/TypeScript，深度掌握微前端架构</li>
+            <li class="en hidden">Proficient in React/Node.js/TypeScript, master of micro-frontend architecture</li>
+            <li class="zh">熟悉 AI 技术与前端结合场景，擅长性能优化</li>
+            <li class="en hidden">Familiar with AI + frontend integration scenarios, skilled in performance optimization</li>
+            <li class="zh">熟练落地 Scrum/DevOps/CI/CD，具备全链路项目管理经验</li>
+            <li class="en hidden">Skilled in implementing Scrum/DevOps/CI/CD with full-link project management experience</li>
+          </ul>
+        </div>
+        
+        <!-- 团队管理与技术引领 -->
+        <div class="competency-card">
+          <div class="competency-header">
+            <div class="competency-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <h3>
+              <span class="zh">团队管理与技术引领</span>
+              <span class="en hidden">Team Management & Technical Leadership</span>
+            </h3>
+          </div>
+          <ul class="competency-list">
+            <li class="zh">资深前端开发，具备 Mentor 经验，擅长培养团队技术能力</li>
+            <li class="en hidden">Senior frontend developer with mentoring experience, skilled in developing team capabilities</li>
+            <li class="zh">跨职能协作主导者，擅长与产品、设计、后端、测试团队协同</li>
+            <li class="en hidden">Cross-functional collaboration leader, adept at coordinating with product, design, backend and testing teams</li>
+            <li class="zh">推动架构升级与技术创新，提升团队整体效能</li>
+            <li class="en hidden">Drive architecture upgrades and technical innovation to improve overall team efficiency</li>
+          </ul>
+        </div>
+        
+        <!-- 项目管理与优化 -->
+        <div class="competency-card">
+          <div class="competency-header">
+            <div class="competency-icon">
+              <i class="fa fa-tasks"></i>
+            </div>
+            <h3>
+              <span class="zh">项目管理与优化</span>
+              <span class="en hidden">Project Management & Optimization</span>
+            </h3>
+          </div>
+          <ul class="competency-list">
+            <li class="zh">擅长快速原型开发与产品迭代，确保项目按时交付</li>
+            <li class="en hidden">Skilled in rapid prototyping and product iteration to ensure on-time delivery</li>
+            <li class="zh">通过技术手段显著提升系统性能与用户体验</li>
+            <li class="en hidden">Significantly improve system performance and user experience through technical means</li>
+            <li class="zh">建立高效开发流程，降低代码缺陷率，提升开发效率</li>
+            <li class="en hidden">Establish efficient development processes, reduce code defect rates, improve development efficiency</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section class="section" id="experience">
+      <h2>
+        <span class="zh">工作经历</span>
+        <span class="en hidden">Work Experience</span>
+      </h2>
+      
+      <div class="timeline">
+        <!-- 字节跳动 -->
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>
+              <span class="zh">抖音集团(字节跳动)</span>
+              <span class="en hidden">Douyin Group (ByteDance)</span>
+            </h3>
+            <span>2019.1 - 2025.1</span>
+          </div>
+          <p class="timeline-position">
+            <span class="zh">Data - 基础架构 - 字节云资深前端开发</span>
+            <span class="en hidden">Data - Infrastructure - ByteDance Cloud Senior Frontend Developer</span>
+          </p>
+          <ul class="timeline-list">
+            <li class="zh">• 作为核心前端架构，主导字节云基座微前端架构设计，实现200+平台入驻，推动集团级IaaS/PaaS/SaaS服务标准化，平台可用性达99.95%</li>
+            <li class="en hidden">• As core frontend architect, led ByteDance Cloud base micro-frontend architecture design, enabling 200+ platform integrations, promoting group-level IaaS/PaaS/SaaS service standardization with 99.95% platform availability</li>
+            <li class="zh">• 担任Mentor，培养5名以上前端工程师，团队人均代码交付效率提升40%</li>
+            <li class="en hidden">• Served as Mentor, trained over 5 frontend engineers, improving team's average code delivery efficiency by 40%</li>
+            <li class="zh">• 引入Service Worker + PWA技术，解决跨境多机房弱网场景，实现100%离线可用，FP/FCP/LCP等核心指标提升35%+</li>
+            <li class="en hidden">• Introduced Service Worker + PWA technology to solve cross-border weak network scenarios, achieving 100% offline availability and improving core metrics like FP/FCP/LCP by 35%+</li>
+          </ul>
+        </div>
+        
+        <!-- 极链科技 -->
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>
+              <span class="zh">极链科技集团(Video++)</span>
+              <span class="en hidden">Video++ Technology Group</span>
+            </h3>
+            <span>2018.2 - 2019.1</span>
+          </div>
+          <p class="timeline-position">
+            <span class="zh">研发部前端架构师</span>
+            <span class="en hidden">R&D Department Frontend Architect</span>
+          </p>
+          <ul class="timeline-list">
+            <li class="zh">• 主导VideoOS系统迭代，设计并开发10+视频广告交互场景，广告点击率提升25%</li>
+            <li class="en hidden">• Led VideoOS system iteration, designed and developed 10+ video ad interaction scenarios, increasing ad click rate by 25%</li>
+            <li class="zh">• 实施前端性能优化方案，页面加载速度提升40%，响应时间降低至200ms以内</li>
+            <li class="en hidden">• Implemented frontend performance optimization solutions, improving page loading speed by 40% and reducing response time to under 200ms</li>
+            <li class="zh">• 引入Preact + Node.js技术栈，实现广告交互组件化开发，开发效率提升30%</li>
+            <li class="en hidden">• Introduced Preact + Node.js technology stack, enabling component-based development of ad interactions, improving development efficiency by 30%</li>
+          </ul>
+        </div>
+        
+        <!-- 上海荟行网络科技 -->
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>
+              <span class="zh">上海荟行网络科技有限公司(最会游)</span>
+              <span class="en hidden">Shanghai Huixing Network Technology Co., Ltd. (Zuihuiyou)</span>
+            </h3>
+            <span>2015.3 - 2018.1</span>
+          </div>
+          <p class="timeline-position">
+            <span class="zh">研发部Team Leader</span>
+            <span class="en hidden">R&D Department Team Leader</span>
+          </p>
+          <ul class="timeline-list">
+            <li class="zh">• 从零到一打造OTA交易平台"最会游"混合原生App及小程序，页面加载速度提升30%，用户活跃度提高20%</li>
+            <li class="en hidden">• Built OTA trading platform "Zui Hui You" hybrid native App and mini-program from scratch, improving page loading speed by 30% and user activity by 20%</li>
+            <li class="zh">• 带领5-7人前端团队，确保项目按时交付率达100%</li>
+            <li class="en hidden">• Led a 5-7 person frontend team, ensuring 100% on-time project delivery rate</li>
+          </ul>
+        </div>
+        
+        <!-- 上海谷居网络科技 -->
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>
+              <span class="zh">上海谷居网络科技有限公司</span>
+              <span class="en hidden">Shanghai Guju Network Technology Co., Ltd.</span>
+            </h3>
+            <span>2014.6 - 2015.3</span>
+          </div>
+          <p class="timeline-position">
+            <span class="zh">研发部前端组长</span>
+            <span class="en hidden">R&D Department Frontend Team Lead</span>
+          </p>
+          <ul class="timeline-list">
+            <li class="zh">• 研发在线家装平台，实现软硬装在线所见即所得般自由定制设计</li>
+            <li class="en hidden">• Developed online home decoration platform, enabling WYSIWYG customization of soft and hard furnishings</li>
+            <li class="zh">• 指导并带领3位前端工程师，负责团队成员的规划成长及绩效考核等</li>
+            <li class="en hidden">• Guided and led 3 frontend engineers, responsible for team members' development planning and performance evaluation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section class="section" id="projects">
+      <h2>
+        <span class="zh">项目经历</span>
+        <span class="en hidden">Project Experience</span>
+      </h2>
+      
+      <div class="space-y-8">
+        <!-- 火山引擎项目 -->
+        <div class="project-item">
+          <div class="project-header">
+            <h3>
+              <span class="zh">火山引擎(字节云)前端效能负责人、核心开发</span>
+              <span class="en hidden">Volcano Engine (ByteDance Cloud) Frontend Efficiency Lead, Core Developer</span>
+            </h3>
+            <span>2022.10 - 2025.1</span>
+          </div>
+          <ul class="project-list">
+            <li class="zh">• 设计"大小基架、内外一体"微前端架构，解决集团内多业务线技术栈碎片化问题，实现200+平台统一接入</li>
+            <li class="en hidden">• Designed "large/small frameworks, internal/external integration" micro-frontend architecture, solving technology stack fragmentation across business lines, enabling unified access for 200+ platforms</li>
+            <li class="zh">• 针对跨境访问场景，采用多机房负载均衡 + Service Worker技术，使弱网环境下页面可交互时间(TTI)从8s降至3s以内</li>
+            <li class="en hidden">• For cross-border access scenarios, adopted multi-data center load balancing + Service Worker technology, reducing Time to Interactive (TTI) from 8s to under 3s in weak network environments</li>
+          </ul>
+        </div>
+        
+        <!-- 前端一体化项目 -->
+        <div class="project-item">
+          <div class="project-header">
+            <h3>
+              <span class="zh">前端一体化项目负责人、核心开发</span>
+              <span class="en hidden">Frontend Integration Project Lead, Core Developer</span>
+            </h3>
+            <span>2022.1 - 2022.10</span>
+          </div>
+          <ul class="project-list">
+            <li class="zh">• 服务SPA、MPA、微前端、混合原生、小程序等项目全生命周期管理</li>
+            <li class="en hidden">• Served full lifecycle management for SPA, MPA, micro-frontend, hybrid native, and mini-program projects</li>
+            <li class="zh">• 使用React、Nodejs(Koa)、Pipeline、CDN等技术框架搭建平台，实现存量前端项目一键迁移</li>
+            <li class="en hidden">• Built platform using React, Nodejs(Koa), Pipeline, CDN and other technologies, enabling one-click migration of existing frontend projects</li>
+          </ul>
+        </div>
+        
+        <!-- DevOps项目 -->
+        <div class="project-item">
+          <div class="project-header">
+            <h3>
+              <span class="zh">DevOps前端负责人、核心开发</span>
+              <span class="en hidden">DevOps Frontend Lead, Core Developer</span>
+            </h3>
+            <span>2019.3 - 2021.12</span>
+          </div>
+          <ul class="project-list">
+            <li class="zh">• 从零搭建集团级CI/CD平台，统一研发流程，覆盖500+项目，线上事故率从1%降至0.1‰</li>
+            <li class="en hidden">• Built group-level CI/CD platform from scratch, unifying R&D processes, covering 500+ projects, reducing online accident rate from 1% to 0.1‰</li>
+            <li class="zh">• 主导前端流水线编排系统开发，实现编码-构建-测试-发布全流程可视化，部署效率提升70%</li>
+            <li class="en hidden">• Led frontend pipeline orchestration system development, enabling visualization of full coding-building-testing-release process, improving deployment efficiency by 70%</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 教育经历 -->
+    <section class="section" id="education">
+      <h2>
+        <span class="zh">教育经历</span>
+        <span class="en hidden">Education</span>
+      </h2>
+      
+      <div class="education">
+        <div class="education-item">
+          <h3>
+            <span class="zh">东南大学</span>
+            <span class="en hidden">Southeast University</span>
+          </h3>
+          <p class="education-degree">
+            <span class="zh">教育技术学硕士</span>
+            <span class="en hidden">Master of Educational Technology</span>
+          </p>
+          <p>
+            <span class="zh">研究方向: 网络教育支撑技术与网络安全</span>
+            <span class="en hidden">Research Focus: Network Education Support Technology and Network Security</span>
+          </p>
+          <p class="education-year">2011.8 - 2014.5</p>
+        </div>
+        
+        <div class="education-item">
+          <h3>
+            <span class="zh">皖西学院</span>
+            <span class="en hidden">West Anhui University</span>
+          </h3>
+          <p class="education-degree">
+            <span class="zh">小学教育(数学)</span>
+            <span class="en hidden">Bachelor of Mathematics</span>
+          </p>
+          <p class="education-year">2007.9 - 2011.6</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 专业认证与荣誉 -->
+    <section class="section" id="certifications">
+      <h2>
+        <span class="zh">专业认证与荣誉</span>
+        <span class="en hidden">Professional Certifications & Honors</span>
+      </h2>
+      
+      <ul class="certifications">
+        <li>
+          <i class="fa fa-certificate"></i>
+          <span class="zh">计算机技术与软件专业技术资格(高级): 信息系统项目管理师(2021)、系统架构设计师(2019)</span>
+          <span class="en hidden">Senior Qualification in Computer Technology and Software: Information System Project Manager (2021), System Architect (2019)</span>
+        </li>
+        <li>
+          <i class="fa fa-trophy"></i>
+          <span class="zh">字节跳动技术学院荣誉讲师(2020)</span>
+          <span class="en hidden">ByteDance Technology Institute Honorary Lecturer (2020)</span>
+        </li>
+        <li>
+          <i class="fa fa-award"></i>
+          <span class="zh">极链科技Hackathon一等奖(2018, 主导视频广告交互创新方案)</span>
+          <span class="en hidden">Video++ Hackathon First Prize (2018, led innovative video ad interaction solution)</span>
+        </li>
+        <li>
+          <i class="fa fa-language"></i>
+          <span>
+            <span class="zh">大学英语六级(CET-6, 500分, 2009年)</span>
+            <span class="en hidden">College English Test Band 6 (CET-6, 500 points, 2009)</span>
+          </span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <p class="zh">© 2025 张舰 - 前端研发专家简历</p>
+      <p class="en hidden">© 2025 Zhang Jian - Frontend R&D Expert Resume</p>
+    </div>
+  </footer>
+
+  <script>
+    // 语言切换功能
+    document.getElementById('zh-btn').addEventListener('click', function() {
+      document.querySelectorAll('.zh').forEach(el => el.classList.remove('hidden'));
+      document.querySelectorAll('.en').forEach(el => el.classList.add('hidden'));
+      this.classList.add('bg-primary', 'text-white');
+      this.classList.remove('bg-gray-200', 'text-gray-700');
+      document.getElementById('en-btn').classList.add('bg-gray-200', 'text-gray-700');
+      document.getElementById('en-btn').classList.remove('bg-primary', 'text-white');
+    });
+    
+    document.getElementById('en-btn').addEventListener('click', function() {
+      document.querySelectorAll('.en').forEach(el => el.classList.remove('hidden'));
+      document.querySelectorAll('.zh').forEach(el => el.classList.add('hidden'));
+      this.classList.add('bg-primary', 'text-white');
+      this.classList.remove('bg-gray-200', 'text-gray-700');
+      document.getElementById('zh-btn').classList.add('bg-gray-200', 'text-gray-700');
+      document.getElementById('zh-btn').classList.remove('bg-primary', 'text-white');
+    });
+    
+    // 滚动动画
+    function checkVisibility() {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (sectionTop < windowHeight * 0.85) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    
+    // 初始检查
+    window.addEventListener('load', checkVisibility);
+    // 滚动时检查
+    window.addEventListener('scroll', checkVisibility);
+    
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      const navContainer = nav.querySelector('.container');
+      if (window.scrollY > 50) {
+        navContainer.style.paddingTop = '8px';
+        navContainer.style.paddingBottom = '8px';
+      } else {
+        navContainer.style.paddingTop = '12px';
+        navContainer.style.paddingBottom = '12px';
+      }
+    });
+  </script>
+</body>
+</html>
