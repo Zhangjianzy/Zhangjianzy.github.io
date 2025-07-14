@@ -6,7 +6,15 @@ export default defineConfig({
   build: {
     outDir: '../',
     minify: 'terser',
-    emptyOutDir: false
+    emptyOutDir: false,
+    rollupOptions: {
+      input: './source/index.html',
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]'
+      }
+    }
   },
   plugins: [
     createHtmlPlugin({
