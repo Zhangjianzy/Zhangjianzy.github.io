@@ -176,6 +176,11 @@
       font-style: normal
     }
 
+    .personal-details-item a {
+      color: var(--dark);
+      text-decoration: none
+    }
+
     .personal-details-item i.fa-envelope::before {
       content: '📮'
     }
@@ -497,6 +502,10 @@
       background-color: var(--dark-section)
     }
 
+    body.dark-mode .personal-details-item a {
+      color: var(--dark-text)
+    }
+
     .theme-toggle {
       position: relative;
       display: inline-flex;
@@ -562,8 +571,8 @@
           <p><span class="zh">创始人 | 前端研发专家 | 硕士</span> <span class="en hidden">Founder | Frontend R&D Expert | Master's
               Degree</span></p>
           <div class="personal-details">
-            <div class="personal-details-item"><i class="fa fa-envelope"></i> <span>zhangjianzy@qq.com</span></div>
-            <div class="personal-details-item"><i class="fa fa-phone"></i> <span>+86 176-0213-5810</span></div>
+            <div class="personal-details-item"><i class="fa fa-envelope"></i> <a href="mailto:zhangjianzy@qq.com">zhangjianzy@qq.com</a></div>
+            <div class="personal-details-item"><i class="fa fa-phone"></i> <a href="tel:+8617602135810">+86 176-0213-5810</a></div>
             <div class="personal-details-item"><i class="fa fa-map-marker"></i> <span class="zh">上海</span> <span
                 class="en hidden">Shanghai, China</span></div>
             <div class="personal-details-item"><i class="fa fa-graduation-cap"></i> <span class="zh">硕士学历</span> <span
