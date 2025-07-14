@@ -8,9 +8,9 @@ export default defineConfig({
     minify: 'terser',
     emptyOutDir: false
   },
-  // plugins: [
-  //   createHtmlPlugin({
-  //     minify: true, // 启用HTML压缩
-  //   }),
-  // ],
+  plugins: [
+    createHtmlPlugin({
+      minify: true, // 启用HTML压缩
+    }),
+  ],
 })
