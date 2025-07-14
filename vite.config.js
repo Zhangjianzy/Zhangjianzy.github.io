@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 export default defineConfig({
-  root: './',
+  root: './source',
   build: {
-    outDir: 'dist',
+    outDir: '../',
     minify: 'terser',
-    emptyOutDir: true
-  }
+    emptyOutDir: false
+  },
+  // plugins: [
+  //   createHtmlPlugin({
+  //     minify: true, // 启用HTML压缩
+  //   }),
+  // ],
 })

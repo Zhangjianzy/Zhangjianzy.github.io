@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vite-plugin-html": "^3.2.2"
   },
   "dependencies": {
     "terser": "^5.43.1"
