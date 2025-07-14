@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="张舰 - 面向 AIGC 转型的前端研发专家，专注于 AIGC 相关前端技术开发。">
-  <meta name="keywords" content="张舰, 前端研发专家, AIGC, 面向 AIGC 转型, 前端技术">
-  <title>张舰 - 面向 AIGC 转型的前端研发专家，创始人，水杉智境工作室</title>
+  <meta name="description" content="张舰 - 水杉智境工作室创始人，资深前端研发专家，专注于AIGC相关前端技术，拥有丰富项目经验与技术成果。">
+  <meta name="keywords" content="张舰, 前端研发专家, AIGC, 水杉智境工作室, 前端技术, 技术架构, 项目管理">
+  <title>张舰 - 水杉智境工作室创始人 | 前端研发专家</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>
     /* 基础样式 */
@@ -80,6 +80,16 @@
     #en-btn {
       background-color: #e5e7eb;
       color: #4b5563;
+    }
+
+    #zh-btn.active, #en-btn.active {
+      color: #fff;
+      background-color: var(--primary);
+    }
+
+    #zh-btn.inactive, #en-btn.inactive {
+      color: #4b5563;
+      background-color: #e5e7eb;
     }
 
     /* 主要内容样式 */
@@ -164,8 +174,26 @@
     }
 
     .personal-details-item i {
+      margin-right: 8px;
       color: var(--primary);
       font-size: 20px;
+      font-style: normal;
+    }
+
+    .personal-details-item i.fa-envelope::before {
+      content: '📮';
+    }
+
+    .personal-details-item i.fa-phone::before {
+      content: '📱';
+    }
+
+    .personal-details-item i.fa-map-marker::before {
+      content: '🏠';
+    }
+
+    .personal-details-item i.fa-graduation-cap::before {
+      content: '🎓';
     }
 
     .personal-info-right {
@@ -239,6 +267,20 @@
 
     .competency-icon i {
       color: var(--primary);
+      font-size: 24px;
+      font-style: normal;
+    }
+
+    .competency-icon i.fa-code::before {
+      content: '🖥';
+    }
+
+    .competency-icon i.fa-users::before {
+      content: '👥';
+    }
+
+    .competency-icon i.fa-tasks::before {
+      content: '📝';
     }
 
     .competency-header h3 {
@@ -475,8 +517,8 @@
             <span class="en hidden">Justin Zhang</span>
           </h2>
           <p>
-            <span class="zh">前端研发专家 | 10年经验 | 硕士 | 创始人</span>
-            <span class="en hidden">Frontend R&D Expert | 10 Years Experience | Master's Degree | Founder</span>
+            <span class="zh">创始人 | 前端研发专家 | 硕士</span>
+            <span class="en hidden">Founder | Frontend R&D Expert | Master's Degree</span>
           </p>
           
           <div class="personal-details">
@@ -486,7 +528,7 @@
             </div>
             <div class="personal-details-item">
               <i class="fa fa-phone"></i>
-              <span>+86 17602135810</span>
+              <span>+86 176-0213-5810</span>
             </div>
             <div class="personal-details-item">
               <i class="fa fa-map-marker"></i>
@@ -844,19 +886,19 @@
     document.getElementById('zh-btn').addEventListener('click', function() {
       document.querySelectorAll('.zh').forEach(el => el.classList.remove('hidden'));
       document.querySelectorAll('.en').forEach(el => el.classList.add('hidden'));
-      this.classList.add('bg-primary', 'text-white');
-      this.classList.remove('bg-gray-200', 'text-gray-700');
-      document.getElementById('en-btn').classList.add('bg-gray-200', 'text-gray-700');
-      document.getElementById('en-btn').classList.remove('bg-primary', 'text-white');
+      this.classList.add('active');
+      this.classList.remove('inactive');
+      document.getElementById('en-btn').classList.add('inactive');
+      document.getElementById('en-btn').classList.remove('active');
     });
     
     document.getElementById('en-btn').addEventListener('click', function() {
       document.querySelectorAll('.en').forEach(el => el.classList.remove('hidden'));
       document.querySelectorAll('.zh').forEach(el => el.classList.add('hidden'));
-      this.classList.add('bg-primary', 'text-white');
-      this.classList.remove('bg-gray-200', 'text-gray-700');
-      document.getElementById('zh-btn').classList.add('bg-gray-200', 'text-gray-700');
-      document.getElementById('zh-btn').classList.remove('bg-primary', 'text-white');
+      this.classList.add('active');
+      this.classList.remove('inactive');
+      document.getElementById('zh-btn').classList.add('inactive');
+      document.getElementById('zh-btn').classList.remove('active');
     });
     
     // 滚动动画
