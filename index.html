@@ -913,13 +913,26 @@
       });
     }
     
+    // 节流函数
+    function throttle(func, delay) {
+      let timer = null;
+      return function() {
+        if (!timer) {
+          func.apply(this, arguments);
+          timer = setTimeout(() => {
+            timer = null;
+          }, delay);
+        }
+      };
+    }
+    
     // 初始检查
     window.addEventListener('load', checkVisibility);
-    // 滚动时检查
-    window.addEventListener('scroll', checkVisibility);
+    // 滚动时检查，添加节流优化
+    window.addEventListener('scroll', throttle(checkVisibility, 200));
     
-    // 导航栏滚动效果
-    window.addEventListener('scroll', function() {
+    // 导航栏滚动效果，添加节流优化
+    window.addEventListener('scroll', throttle(function() {
       const nav = document.querySelector('nav');
       const navContainer = nav.querySelector('.container');
       if (window.scrollY > 50) {
@@ -929,7 +942,7 @@
         navContainer.style.paddingTop = '12px';
         navContainer.style.paddingBottom = '12px';
       }
-    });
+    }, 200));
   </script>
 </body>
 </html>
