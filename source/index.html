@@ -861,7 +861,7 @@
       sections.forEach(section => {
         const sectionTop = section.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        if (sectionTop < windowHeight * 0.85) {
+        if (sectionTop < windowHeight * 0.9) {
           section.classList.add('visible');
         }
       });
@@ -909,7 +909,7 @@
         navContainer.style.paddingTop = '12px';
         navContainer.style.paddingBottom = '12px';
       }
-    }, 200));</script>
+    }, 100));</script>
 </body>
 
 </html>
