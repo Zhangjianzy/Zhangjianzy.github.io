@@ -4,9 +4,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
   base: '/',
-  root: './source',
+  // root: './source',
   build: {
-    outDir: '../dist',
+    outDir: 'dist',
     minify: 'terser',
     emptyOutDir: false,
     rollupOptions: {
