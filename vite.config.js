@@ -3,10 +3,10 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  // base: '/',
-  // root: './source',
+  base: '/',
+  root: './source',
   build: {
-    outDir: 'dist',
+    outDir: '../dist',
     minify: 'terser',
     emptyOutDir: false,
     rollupOptions: {
@@ -25,9 +25,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: "My Resume",
-        short_name: "Resume",
-        description: "Personal resume website",
+        name: "Justin Zhang's resume",
+        short_name: "Justin's Resume",
+        description: "Justin Zhang's resume website",
         theme_color: "#ffffff",
         start_url: "/",
         display: "standalone",
