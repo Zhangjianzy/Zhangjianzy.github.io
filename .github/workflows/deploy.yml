@@ -18,7 +18,9 @@ jobs:
         with:
           node-version: '20'
       - run: npm install -g pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: |
+          pnpm approve-builds esbuild
+          pnpm install --frozen-lockfile
 
       - name: Clean previous build
         run: rm -rf dist
