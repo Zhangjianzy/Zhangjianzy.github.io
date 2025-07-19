@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite build",
     "build:local": "vite build && npx serve dist",
-    "install": "pnpm install",
     "dev": "vite dev"
   },
   "keywords": [],
