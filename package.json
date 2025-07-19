@@ -7,14 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite build",
     "install": "pnpm install",
-    "dev": "vite dev"
+    "dev": "vite dev",
+    "deploy": "pnpm run build && gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "vite": "^7.0.4",
-    "vite-plugin-html": "^3.2.2"
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-pwa": "^1.0.1"
   },
   "dependencies": {
     "terser": "^5.43.1"
