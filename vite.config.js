@@ -3,7 +3,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/',
+  // base: '/',
   // root: './source',
   build: {
     outDir: 'dist',
