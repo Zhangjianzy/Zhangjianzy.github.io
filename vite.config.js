@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -5,6 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   base: '/',
   root: './source',
+  publicDir: path.resolve(__dirname, 'public'),
   build: {
     outDir: '../dist',
     minify: 'terser',
@@ -18,11 +20,17 @@ export default defineConfig({
       }
     }
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname),
+    },
+  },
   plugins: [
     createHtmlPlugin({
       minify: true, // 启用HTML压缩
     }),
     VitePWA({
+      dest: 'public',
       registerType: 'autoUpdate',
       manifest: {
         name: "Justin Zhang's resume",
@@ -33,12 +41,12 @@ export default defineConfig({
         display: "standalone",
         icons: [
           {
-            src: "assets/favicon.svg",
+            src: "/favicon.svg",
             sizes: "192x192",
             type: "image/svg+xml"
           },
           {
-            src: "assets/favicon.svg",
+            src: "/favicon.svg",
             sizes: "512x512",
             type: "image/svg+xml"
           }

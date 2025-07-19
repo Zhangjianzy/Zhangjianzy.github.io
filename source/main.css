@@ -210,12 +210,12 @@ body {
       background-image:url('/assets/avatar.png');
       background-size:contain;
       background-position:center;
-      background-repeat:no-repeat;
+      background-repeat:no-repeat
     }
 
     .avatar-container:hover {
       background-color: #fff;
-      background-image: url('/assets/wechatqrcode.png');
+      background-image: url('/assets/wechatqrcode.jpg');
       background-size: cover;
     }
 
