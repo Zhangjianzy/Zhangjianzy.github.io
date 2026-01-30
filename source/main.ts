@@ -12,7 +12,7 @@ class I18nManager {
   private static instance: I18nManager;
   private i18n: I18nConfig = {
     zh: {
-      'page.title': '张舰 - 水杉智境工作室创始人 | 前端研发专家'
+      'page.title': '张舰 - 水杉智境工作室创始人 | 研发专家'
     },
     en: {
       'page.title': 'Justin Zhang - Founder of Metasequoia AI Studio | Frontend R&D Expert'
