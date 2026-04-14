@@ -23,6 +23,10 @@ body {
       padding: 0 16px
     }
 
+    .container .more {
+      display: none;
+    }
+
     nav {
       position: fixed;
       top: 0;
@@ -116,21 +120,9 @@ body {
       flex-direction: column
     }
 
-    @media (min-width:768px) {
-      .personal-info {
-        flex-direction: row
-      }
-    }
-
     .personal-info-left {
       flex: 1;
       margin-bottom: 24px
-    }
-
-    @media (min-width:768px) {
-      .personal-info-left {
-        margin-bottom: 0
-      }
     }
 
     .personal-info h2 {
@@ -163,12 +155,6 @@ body {
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px
-    }
-
-    @media (min-width:768px) {
-      .personal-details {
-        grid-template-columns: 1fr 1fr
-      }
     }
 
     .personal-details-item {
@@ -238,12 +224,6 @@ body {
       justify-content: center
     }
 
-    @media (min-width:768px) {
-      .personal-info-right {
-        justify-content: flex-end
-      }
-    }
-
     .avatar-container {
       width: 144px;
       height: 144px;
@@ -275,12 +255,6 @@ body {
       display: grid;
       grid-template-columns: 1fr;
       gap: 24px
-    }
-
-    @media (min-width:768px) {
-      .competencies {
-        grid-template-columns: 1fr 1fr 1fr
-      }
     }
 
     .competency-card {
@@ -376,12 +350,6 @@ body {
       gap: 20px;
     }
 
-    @media (min-width:768px) {
-      .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
     .stat-card {
       text-align: center;
       padding: 24px 16px;
@@ -456,14 +424,6 @@ body {
       margin-bottom: 8px
     }
 
-    @media (min-width:768px) {
-      .timeline-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center
-      }
-    }
-
     .timeline-header h3 {
       font-size: 20px;
       font-weight: 600;
@@ -527,14 +487,6 @@ body {
       margin-bottom: 8px
     }
 
-    @media (min-width:768px) {
-      .project-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center
-      }
-    }
-
     .project-header h3 {
       font-size: 20px;
       font-weight: 600;
@@ -560,12 +512,6 @@ body {
       display: grid;
       grid-template-columns: 1fr;
       gap: 24px
-    }
-
-    @media (min-width:768px) {
-      .education {
-        grid-template-columns: 1fr 1fr
-      }
     }
 
     .education-item {
@@ -731,4 +677,42 @@ body {
 
     input:checked+.slider:before {
       transform: translateX(26px)
+    }
+
+
+    @media (min-width:768px) {
+      .container .more {
+        display: inline;
+      }
+      .personal-info {
+        flex-direction: row
+      }
+      .personal-info-left {
+        margin-bottom: 0
+      }
+      .personal-details {
+        grid-template-columns: 1fr 1fr
+      }
+      .personal-info-right {
+        justify-content: flex-end
+      }
+      .competencies {
+        grid-template-columns: 1fr 1fr 1fr
+      }
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .timeline-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center
+      }
+      .project-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center
+      }
+      .education {
+        grid-template-columns: 1fr 1fr
+      }
     }
